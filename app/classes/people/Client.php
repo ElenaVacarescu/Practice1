@@ -7,6 +7,7 @@
  */
 
 namespace classes\people;
+use classes\database\DbSingleton2;
 
 /**
  * Description of Client
@@ -20,6 +21,7 @@ class Client extends Person{
      * @var array
      */
     private $rented = [];
+    private $_dbh;
     /**
      * Client constructor.
      * @param string $name
@@ -29,6 +31,23 @@ class Client extends Person{
     public function __construct($name, $age, $isAdmin = false)
     {
         parent::__construct($name, $age, $isAdmin);
+        $db = DbSingleton2::getInstance();
+        $this->_dbh = $db->getConnection();
+    }
+    
+        public function getClients()
+    {
+        try {
+            /*** The SQL SELECT statement ***/
+            $sql = "SELECT * FROM categorii";
+            foreach ($this->_dbh->query($sql) as $row) {
+                var_dump($row);
+            }
+            /*** close the database connection ***/
+            $this->_dbh = null;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
     /**
      * @return array
@@ -47,4 +66,5 @@ class Client extends Person{
             echo 'nothing borrowed';
         }
     }
+    
 }

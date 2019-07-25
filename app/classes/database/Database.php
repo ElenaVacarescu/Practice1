@@ -28,6 +28,10 @@ class Database {
         private $DB_database = "outletfashion";
         //pt SQLite, schmbam doar dsl-ul;
         
+        public function __construct(){
+            $dbi = DbSingleton2::getInstance();
+            $this->db = $dbi->getConnection();
+        }
         /**
          *
          * @Connect to the database and set the error mode to Exception
@@ -35,7 +39,8 @@ class Database {
          * @Throws PDOException on failure
          *
          */
-        public function conn()
+        
+        /*public function conn()
         {
             //$this->db= Db2::getInstance(); pt singleton;
            try
@@ -52,7 +57,7 @@ class Database {
             {
                 echo $e->getMessage();
             }
-        }
+        }*/
           public function lastId()
             {
                 return $this->db->lastInsertId();

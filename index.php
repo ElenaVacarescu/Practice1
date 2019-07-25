@@ -28,7 +28,7 @@ echo sprintf("<p>We have %d Media in library</p>", Media::getMediaCount());
 
 
 //test mysql
-$crud=new Database();
+/*$crud=new Database();
 
 $records = $crud->rawSelect('SELECT * FROM branduri');
 
@@ -53,10 +53,12 @@ $rows = $records->fetchAll(PDO::FETCH_ASSOC);
     )";
 
    // $crud->exec($sql);
-
+*/
     /*** insert values into db ***/
     $client1=new classes\people\Client('Ion Ion', 22, 0);
+    $client1->getClients();die;
     $client2=new classes\people\Client('Cristian Vasilw', 40, 1);
+ 
     //pt inserare
     $values = array(
         array('name'=>$client1->getName(), 'age'=>$client1->getAge(), 'isAdmin'=>$client1->isAdmin()),
